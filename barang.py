@@ -54,8 +54,11 @@ def readGoods():
     )
     rows = cursor.fetchall()
     print("\n" + "List Barang")
+    print(
+        f"{'ID Barang':<10} {'Nama barang':<15} {'Kode Barang':<15} {'Stok Barang':<15} {'Harga':<15}"
+    )
     for row in rows:
-        print(row)
+        print(f"{row[0]:<10} {row[1]:<15} {row[2]:<15} {row[3]:<15} {row[4]:<15}")
     conn.close()
 
 
@@ -97,7 +100,7 @@ def deleteGoods():
     elif goodsTransactionExist(idGoods):
         print(f"ID Barang '{idGoods}' memiliki transaksi dan tidak bisa dihapus")
         return deleteGoods()
-    cursor.execute("DELETE FROM barang WHERE id_barang = ?", (idGoods))
+    cursor.execute("DELETE FROM barang WHERE id_barang = ?", (idGoods,))
     conn.commit()
     conn.close()
     readGoods()

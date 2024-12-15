@@ -71,9 +71,9 @@ def readUser():
     cursor.execute("SELECT id_user, email, role FROM user")
     rows = cursor.fetchall()
     print("\n" + "List User")
+    print(f"{'ID User':<10} {'Email':<15} {'Role':<15}")
     for row in rows:
-        print(row)
-    conn.commit()
+        print(f"{row[0]:<10} {row[1]:<15} {row[2]:<15}")
     conn.close()
 
 
@@ -112,7 +112,7 @@ def deleteUser():
     elif userTransactionExist(idUser):
         print(f"ID User '{idUser}' memiliki transaksi dan tidak bisa dihapus")
         return deleteUser()
-    cursor.execute("DELETE FROM user WHERE id_user = ?", (idUser))
+    cursor.execute("DELETE FROM user WHERE id_user = ?", (idUser,))
     conn.commit()
     conn.close()
     readUser()

@@ -48,13 +48,16 @@ def logout():
     index()
 
 
-def validatorNumber(type, textInput, textError, textSaparator):
+def validatorNumber(type, textInput, textError, textSaparator, allowEmpty=False):
     while True:
         try:
-            if type == "int":
-                return int(input(textInput))
+            value = input(textInput)
+            if allowEmpty and value == "":
+                return value
+            elif type == "int":
+                return int(value)
             elif type == "float":
-                return float(input(textInput))
+                return float(value)
         except ValueError:
             print(textError)
             if textSaparator:

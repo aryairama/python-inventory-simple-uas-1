@@ -42,7 +42,7 @@ def tableTransaksi():
         id_barang INTEGER NOT NULL,
         jenis_transaksi TEXT CHECK(jenis_transaksi IN("masuk","keluar")) NOT NULL,
         jumlah INTEGER NOT NULL,
-        total_harga DECIMAL(10,2) NOT NULL,
+        harga_satuan DECIMAL(10,2) NOT NULL,
         tanggal_transaksi DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (id_user) REFERENCES  user(user_id),
         FOREIGN KEY (id_barang) REFERENCES  barang (id_barang)

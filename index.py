@@ -2,6 +2,7 @@ def index():
     from auth import isAuth, login, getRole, logout
     from user import userMenu
     from barang import goodsMenu
+    from transaksi import transactionMenu
 
     if isAuth():
         print("\n" + "=" * 10 + "Menu Utama" + "=" * 10)
@@ -13,7 +14,7 @@ def index():
         if choice == "1":
             goodsMenu()
         elif choice == "2":
-            print("transaksi")
+            transactionMenu()
         elif choice == "3" and getRole() == "admin":
             userMenu()
         elif choice == "0":
