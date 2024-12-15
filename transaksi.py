@@ -106,7 +106,7 @@ def readTransaction():
     )
     for row in rows:
         print(
-            f"{row[7]:<20} {row[0]:<20} {row[1]:<20} {row[2]:<20} {row[3]:<20} {row[4]:<20} {row[5]:<20} {(row[5]*row[4]):<20} {row[6]}"
+            f"{row[7]:<20} {row[0]:<20} {row[1]:<20} {row[2]:<20} {row[3]:<20} {row[4]:<20} {row[5]:<20} {(row[5]*row[4]):<20} {datetime.datetime.fromisoformat(row[6]).strftime('%Y-%m-%d %H:%M:%S')}"
         )
     conn.close()
 
