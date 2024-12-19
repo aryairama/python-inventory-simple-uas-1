@@ -82,12 +82,14 @@ def updateUser():
     conn = sqlite3.connect("warehouse.db")
     cursor = conn.cursor()
     idUser = input("Masukkan ID User yang ingin di edit: ")
-    if not userFind(idUser):
+    currentUser = userFind(idUser)
+    if not currentUser:
         print(f"ID User '{idUser}' tidak ditemukan")
         return updateUser()
     email = input("Masukkan Email user: ")
-    if userFind(email, "email"):
-        print("Email Sudah digunakan")
+    existingUser = userFind(email, "email")
+    if existingUser and existingUser[0] != int(idUser):
+        print("Email sudah digunakan oleh pengguna lain")
         return updateUser()
     role = input("Pilih Role User (1.Admin,2.Staff): ")
     password = input("Masukkan Password user: ")
