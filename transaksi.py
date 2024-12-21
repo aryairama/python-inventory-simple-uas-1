@@ -129,7 +129,7 @@ def updateTransaction():
     goods = goodsFind(transaction[0])
     latestCountGoods = (
         goods[3] + transaction[1]
-        if typeTransaction == "keluar"
+        if transaction[4] == "keluar"
         else goods[3] - transaction[1]
     )
     countGoods = 0
@@ -141,6 +141,9 @@ def updateTransaction():
             "",
         )
         if countGoods > latestCountGoods and typeTransaction == "keluar":
+            print(
+                "Jumlah barang keluar tidak boleh melebihi stok terkini barang tersebut"
+            )
             continue
         else:
             break
