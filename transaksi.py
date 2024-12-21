@@ -113,7 +113,7 @@ def readTransaction():
 
 def updateTransaction():
     from barang import goodsFind
-    from auth import validatorNumber
+    from auth import validatorNumber, getRole, getCredential
 
     readTransaction()
 
@@ -121,7 +121,11 @@ def updateTransaction():
     cursor = conn.cursor()
     idTransaction = input("Masukkan ID Transaksi yang ingin di edit: ")
     transaction = transactionFind(idTransaction)
-    if not transaction:
+    if not transaction or (
+        transaction
+        and getRole() == "staff"
+        and transaction[2] != getCredential().get("id_user")
+    ):
         print(f"ID Transaksi `{idTransaction}` tidak ditemukan")
         return updateTransaction()
     typeTransaction = input("masukan jenis transaksi (1.masuk, 2.keluar): ")
@@ -184,6 +188,7 @@ def updateTransaction():
 
 def deleteTransaction():
     from barang import goodsFind
+    from auth import getRole, getCredential
 
     readTransaction()
 
@@ -191,7 +196,11 @@ def deleteTransaction():
     cursor = conn.cursor()
     idTransaction = input("Masukkan ID Transaksi yang ingin di hapus: ")
     transaction = transactionFind(idTransaction)
-    if not transaction:
+    if not transaction or (
+        transaction
+        and getRole() == "staff"
+        and transaction[2] != getCredential().get("id_user")
+    ):
         print(f"ID Transaksi `{idTransaction}` tidak ditemukan")
         return deleteTransaction()
     goods = goodsFind(transaction[0])
